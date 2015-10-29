@@ -27,7 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B5032E3D187DD68600C5BAB4 /* deploy.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = deploy.sh; sourceTree = "<group>"; };
 		B5032E3E187DD68600C5BAB4 /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		B5C505BC187B3B1D004B208D /* pngs2mp4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pngs2mp4.m; sourceTree = "<group>"; };
 		B5C505C1187B3B2F004B208D /* pngs2mp4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pngs2mp4; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,6 +34,7 @@
 		B5C505CF187B5826004B208D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B5C505D1187B5832004B208D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B5C505D3187B5842004B208D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		B5D6DBA91BE2CF1100CA4E4B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 		B5C505B5187B3AF8004B208D = {
 			isa = PBXGroup;
 			children = (
-				B5032E3D187DD68600C5BAB4 /* deploy.sh */,
+				B5D6DBA91BE2CF1100CA4E4B /* README.md */,
 				B5032E3E187DD68600C5BAB4 /* makefile */,
 				B5C505BC187B3B1D004B208D /* pngs2mp4.m */,
 				B5C505C2187B3B2F004B208D /* Products */,
@@ -110,7 +110,7 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = B5C505B9187B3AF8004B208D /* Build configuration list for PBXProject "pngs2mp4" */;
+			buildConfigurationList = B5C505B9187B3AF8004B208D /* Build configuration list for PBXProject "_pngs2mp4" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -237,7 +237,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B5C505B9187B3AF8004B208D /* Build configuration list for PBXProject "pngs2mp4" */ = {
+		B5C505B9187B3AF8004B208D /* Build configuration list for PBXProject "_pngs2mp4" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5C505BA187B3AF8004B208D /* Debug */,
