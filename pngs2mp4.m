@@ -461,7 +461,7 @@ int main(int argc, char *argv[]) {
 
 				[NSGraphicsContext setCurrentContext:nsContext];
 
-                for (int k = 0; k <ndirs; k++) {
+                for (int k = 0; k < ndirs; k++) {
                     // The directory of the image
                     NSString *dir = [dirs objectAtIndex:k];
                     
