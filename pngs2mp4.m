@@ -41,7 +41,7 @@ void help() {
 		   "    -h       Height of the frame.\n"
 		   "    -l       Logo at the corner.\n"
 		   "    -o       Output filename.\n"
-		   "    -w       Fit 16 x 9 widescreen\n"
+		   "    -w       Fit to 16 x 9 widescreen.\n"
 		   "    -v       Increase verbose level.\n"
 		   "\n"
 		   "    <dir_x>  Directories that contains the images, which must contain the\n"
@@ -73,7 +73,7 @@ void help() {
 		   "  generates a lot of internal messages. A logo named 'logo.png' will also\n"
 		   "  be imprinted at the lower right corner.\n"
 		   "\n"
-		   "  Copyright (c) 2014 Boon Leng Cheong. All Rights Reserved.\n\n"
+		   "  Copyright (c) 2014-2015 Boon Leng Cheong. All Rights Reserved.\n\n"
 		   );
 }
 
@@ -275,6 +275,7 @@ int main(int argc, char *argv[]) {
         NSRect drawRect0, drawRect1, drawRect2;
         if (ndirs == 1) {
             targetRect = NSMakeRect(0.0f, 0.0f, imageWidth, imageHeight);
+            drawRect0 = NSMakeRect(0.0f, 0.0f, imageWidth, imageHeight);
         } else if (ndirs == 2) {
             targetRect = NSMakeRect(0.0f, 0.0f, 2.0f * imageWidth, imageHeight);
             drawRect0 = NSMakeRect(0.0f, 0.0f, imageWidth, imageHeight);
@@ -293,16 +294,22 @@ int main(int argc, char *argv[]) {
 			}
 			// Crop out from the original if we want to fit the image into a wide screen aspect ratio
 			if (fitForWideScreen) {
-				if (ratio < 16.0 / 9.0) {
-					sourceRect.origin.y = 0.5 * (sourceRect.size.height - 9.0 / 16.0 * sourceRect.size.width);
-					sourceRect.size.height = 9.0 / 16.0 * sourceRect.size.width;
+				if (ratio < 16.0f / 9.0f) {
+					sourceRect.origin.y = 0.5f * (sourceRect.size.height - 9.0f / 16.0f * sourceRect.size.width);
+					sourceRect.size.height = 9.0f / 16.0f * sourceRect.size.width;
 				} else {
-					sourceRect.origin.x = sourceRect.size.width - 0.5 * 16.0 / 9.0 * sourceRect.size.height;
-					sourceRect.size.width = 16.0 / 9.0 * sourceRect.size.height;
+					sourceRect.origin.x = sourceRect.size.width - 0.5f * 16.0f / 9.0f * sourceRect.size.height;
+					sourceRect.size.width = 16.0f / 9.0f * sourceRect.size.height;
 				}
-				imageWidth = (size_t)(16.0 / 9.0 * height);
+				imageWidth = (size_t)(16.0f / 9.0f * height);
 				targetRect.size.width = imageWidth;
 				targetRect.size.height = imageHeight;
+                if (ndirs == 1) {
+                    drawRect0 = targetRect;
+                } else if (ndirs == 2) {
+                    drawRect0 = targetRect;
+                    drawRect1 = NSOffsetRect(drawRect0, imageWidth, 0.0f);
+                }
 			} else {
 				imageWidth = (size_t)(ratio * height);
                 if (ndirs == 1) {
@@ -357,7 +364,7 @@ int main(int argc, char *argv[]) {
 		// Check bitrate based on image size
 		if (bitrate == 0) {
 			//bitrate = roundf(imageHeight * imageWidth * fps);
-            bitrate = 50000000;
+            bitrate = 62500000;
 			if (verbose) {
 				printf("Info: Bitrate = %ld bps.\n", bitrate);
 			}
@@ -380,12 +387,15 @@ int main(int argc, char *argv[]) {
 		if (verbose)
 			printf("Info: Video initialized\n");
 
-		NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+//        [NSNumber numberWithFloat:0.8], AVVideoQualityKey,
+
+        NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
 									   [NSNumber numberWithInteger:targetRect.size.width], AVVideoWidthKey,
 									   [NSNumber numberWithInteger:targetRect.size.height], AVVideoHeightKey,
 									   AVVideoCodecH264, AVVideoCodecKey,
 									   [NSDictionary dictionaryWithObjectsAndKeys:
-										[NSNumber numberWithInteger:bitrate], AVVideoAverageBitRateKey,
+                                        AVVideoProfileLevelH264High41, AVVideoProfileLevelKey,
+                                        [NSNumber numberWithInteger:bitrate], AVVideoAverageBitRateKey,
 										nil], AVVideoCompressionPropertiesKey,
 									   nil];
 		

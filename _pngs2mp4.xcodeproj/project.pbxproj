@@ -108,7 +108,7 @@
 		B5C505B6187B3AF8004B208D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = B5C505B9187B3AF8004B208D /* Build configuration list for PBXProject "_pngs2mp4" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -142,6 +142,7 @@
 		B5C505BA187B3AF8004B208D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
