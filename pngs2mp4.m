@@ -368,11 +368,11 @@ int main(int argc, char *argv[]) {
 			if (verbose) {
 				printf("Info: Bitrate = %ld bps.\n", bitrate);
 			}
-		} else if (bitrate < 5000000) {
+		} else if (bitrate < 1000000) {
 			if (verbose) {
-				bitrate = 5000000;
+				bitrate = 1000000;
 			}
-			printf("Info: Bitrate too low, overriden with 5 Mbps.\n");
+			printf("Info: Bitrate too low, overriden with 1 Mbps.\n");
 		}
 		
 		// Video

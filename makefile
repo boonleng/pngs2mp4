@@ -2,7 +2,7 @@ PROGS = pngs2mp4
 
 CC = clang
 
-CFLAGS = -mmacosx-version-min=10.7
+CFLAGS = -mmacosx-version-min=10.9
 CFLAGS += -Os
 CFLAGS += -framework Foundation
 CFLAGS += -framework AppKit
