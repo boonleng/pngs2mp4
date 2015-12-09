@@ -12,7 +12,7 @@ Usage:
         -h       Height of the frame.
         -l       Logo at the corner.
         -o       Output filename.
-        -w       Fit 16 x 9 widescreen
+        -w       Fit to 16 x 9 widescreen.
         -v       Increase verbose level.
 
         <dir_x>  Directories that contains the images, which must contain the same number of images.
@@ -42,4 +42,4 @@ EXAMPLE 2:
 
 generates a 10-fps movie named sample.mp4 in the current folder using images in the folder 'images'. The utility runs in a verbose mode, which generates a lot of internal messages. A logo named 'logo.png' will also be imprinted at the lower right corner.
 
-Copyright (c) 2014 Boon Leng Cheong. All Rights Reserved.
+Copyright (c) 2014-2016 Boon Leng Cheong. All Rights Reserved.

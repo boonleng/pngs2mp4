@@ -73,7 +73,7 @@ void help() {
 		   "  generates a lot of internal messages. A logo named 'logo.png' will also\n"
 		   "  be imprinted at the lower right corner.\n"
 		   "\n"
-		   "  Copyright (c) 2014-2015 Boon Leng Cheong. All Rights Reserved.\n\n"
+		   "  Copyright (c) 2014-2016 Boon Leng Cheong. All Rights Reserved.\n\n"
 		   );
 }
 
