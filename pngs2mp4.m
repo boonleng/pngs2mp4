@@ -162,9 +162,15 @@ int main(int argc, char *argv[]) {
             NSString *dir = [[NSURL fileURLWithPath:[[NSString stringWithUTF8String:argv[i++]] stringByExpandingTildeInPath]] path];
             [dirs addObject:dir];
         }
-        NSLog(@"dirs = %@", dirs);
+        
+        if ([dirs count] == 0) {
+            help();
+            return EXIT_SUCCESS;
+        }
 		
-		// Output video name
+        NSLog(@"dirs = %@  [ %zu ]", dirs, dirs.count);
+
+        // Output video name
 		NSURL *outputPath;
 		if (outputName) {
 			outputPath = [NSURL fileURLWithPath:[outputName stringByExpandingTildeInPath]];
@@ -465,6 +471,12 @@ int main(int argc, char *argv[]) {
 		NSTimeInterval __block t0 = [NSDate timeIntervalSinceReferenceDate], t1;
 	
 		dispatch_queue_t queue = dispatch_queue_create("videoInputQueue", NULL);
+        dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+        
+        if (sem == NULL) {
+            fprintf(stderr, COLOR_RED "Error creating semaphore." COLOR_RESET "\n");
+            exit(EXIT_FAILURE);
+        };
 
 		[videoWriterInput requestMediaDataWhenReadyOnQueue:queue usingBlock:^{
 			while ([videoWriterInput isReadyForMoreMediaData]) {
@@ -537,7 +549,8 @@ int main(int argc, char *argv[]) {
 				if (frame == images.count) {
 					[videoWriterInput markAsFinished];
 					[videoWriter finishWritingWithCompletionHandler:^{
-						videoClosed = TRUE;
+                        dispatch_semaphore_signal(sem);
+                        videoClosed = TRUE;
 					}];
 					[videoWriter release];
 					break;
@@ -551,10 +564,15 @@ int main(int argc, char *argv[]) {
 		}];
 
 		// Wait until the video is closed
-		while (!videoClosed) {
-			[NSThread sleepForTimeInterval:0.05];
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        
+		if (!videoClosed) {
+			fprintf(stderr, COLOR_RED "Inconsistent exit state." COLOR_RESET "\n");
 		}
 
+        dispatch_release(sem);
+        dispatch_release(queue);
+        
 		CFRelease(context);
 		
 		CVPixelBufferUnlockBaseAddress(buffer, 0);
